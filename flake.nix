@@ -109,6 +109,20 @@
               ];
             };
 
+            facebook = {
+              containers = mkForce { };
+
+              languages = {
+                rust.enable = true;
+                python.enable = true;
+              };
+
+              packages = [
+                pkgs.gnumake
+                pkgs.mercurial
+              ];
+            };
+
             linux = {
               containers = mkForce { };
 
