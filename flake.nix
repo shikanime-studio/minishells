@@ -65,6 +65,7 @@
         git-hooks.flakeModule
         treefmt-nix.flakeModule
       ];
+
       perSystem =
         { lib, pkgs, ... }:
         with lib;
@@ -170,10 +171,12 @@
             };
           };
         };
+
       flake.templates.default = {
         path = ./templates/default;
         description = "A devenv template with default settings.";
       };
+
       systems = [
         "x86_64-linux"
         "x86_64-darwin"
