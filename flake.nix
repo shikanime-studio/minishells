@@ -65,6 +65,7 @@
         git-hooks.flakeModule
         treefmt-nix.flakeModule
       ];
+
       perSystem =
         { lib, pkgs, ... }:
         with lib;
@@ -90,12 +91,12 @@
                 pkgs.yq
               ];
             };
+
             default.imports = [
-              inputs.devlib.devenvModules.git
-              inputs.devlib.devenvModules.github
-              inputs.devlib.devenvModules.nix
-              inputs.devlib.devenvModules.shell
-              inputs.devlib.devenvModules.shikanime
+              devlib.devenvModules.git
+              devlib.devenvModules.nix
+              devlib.devenvModules.shell
+              devlib.devenvModules.shikanime
             ];
 
             jj-vcs = {
@@ -107,6 +108,7 @@
                 pkgs.libiconv
               ];
             };
+
             linux = {
               containers = mkForce { };
 
@@ -127,6 +129,7 @@
               ++ optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.elfutils) pkgs.elfutils
               ++ optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.pahole) pkgs.pahole;
             };
+
             longhorn = {
               containers = mkForce { };
 
@@ -144,6 +147,7 @@
                 pkgs.kustomize
               ];
             };
+
             nixos = {
               containers = mkForce { };
 
@@ -153,6 +157,12 @@
             };
           };
         };
+
+      flake.templates.default = {
+        path = ./templates/default;
+        description = "A devenv template with default settings.";
+      };
+
       systems = [
         "x86_64-linux"
         "x86_64-darwin"
