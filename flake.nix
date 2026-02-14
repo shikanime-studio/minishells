@@ -113,6 +113,10 @@
               containers = mkForce { };
 
               languages = {
+                javascript = {
+                  enable = true;
+                  yarn.enable = true;
+                };
                 rust.enable = true;
                 python.enable = true;
               };
