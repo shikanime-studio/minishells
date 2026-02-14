@@ -119,6 +119,7 @@
 
               packages = [
                 pkgs.gnumake
+                pkgs.libiconv
                 pkgs.mercurial
               ];
             };
