@@ -99,6 +99,15 @@
               devlib.devenvModules.shikanime
             ];
 
+            codegouvfr = {
+              containers = mkForce { };
+
+              languages.javascript = {
+                enable = true;
+                yarn.enable = true;
+              };
+            };
+
             jj-vcs = {
               containers = mkForce { };
 
