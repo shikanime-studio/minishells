@@ -81,25 +81,40 @@
             cloud-pi-native = {
               containers = mkForce { };
 
-              packages = [
-                pkgs.age
-                pkgs.ansible
-                pkgs.crc
-                pkgs.docker
-                pkgs.gnutar
-                pkgs.kind
-                pkgs.kubectl
-                pkgs.kubernetes-helm
-                pkgs.nodejs_24
-                pkgs.pnpm
-                pkgs.openssl
-                pkgs.ruby
-                pkgs.teleport
-                pkgs.uv
-                pkgs.yq
+              env = {
+                PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+                PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
+                PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+              };
+
+              languages = {
+                javascript = {
+                  enable = true;
+                  pnpm.enable = true;
+                };
+                python = {
+                  enable = true;
+                  uv.enable = true;
+                };
+                ruby.enable = true;
+              };
+
+              packages = with pkgs; [
+                age
+                ansible
+                crc
+                docker
+                gnutar
+                kind
+                kubectl
+                kubernetes-helm
+                pnpm
+                prisma_7
+                openssl
+                teleport
+                yq
               ];
             };
-
 
             codegouvfr = {
               containers = mkForce { };
