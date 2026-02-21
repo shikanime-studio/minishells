@@ -71,6 +71,13 @@
         with lib;
         {
           devenv.shells = {
+            default.imports = [
+              devlib.devenvModules.git
+              devlib.devenvModules.nix
+              devlib.devenvModules.shell
+              devlib.devenvModules.shikanime
+            ];
+
             cloud-pi-native = {
               containers = mkForce { };
 
@@ -85,6 +92,7 @@
                 pkgs.kubernetes-helm
                 pkgs.nodejs_24
                 pkgs.pnpm
+                pkgs.openssl
                 pkgs.ruby
                 pkgs.teleport
                 pkgs.uv
@@ -92,12 +100,6 @@
               ];
             };
 
-            default.imports = [
-              devlib.devenvModules.git
-              devlib.devenvModules.nix
-              devlib.devenvModules.shell
-              devlib.devenvModules.shikanime
-            ];
 
             codegouvfr = {
               containers = mkForce { };
