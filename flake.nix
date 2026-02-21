@@ -82,9 +82,10 @@
               containers = mkForce { };
 
               env = {
-                PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
-                PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/query-engine";
-                PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+                PRISMA_FMT_BINARY = "${pkgs.prisma-engines_6}/bin/prisma-fmt";
+                PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines_6}/bin/query-engine";
+                PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines_6}/lib/libquery_engine.node";
+                PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines_6}/bin/schema-engine";
               };
 
               languages = {
@@ -109,7 +110,6 @@
                 kubectl
                 kubernetes-helm
                 pnpm
-                prisma_7
                 openssl
                 teleport
                 yq
