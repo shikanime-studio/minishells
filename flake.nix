@@ -103,7 +103,6 @@
               packages = with pkgs; [
                 age
                 ansible
-                chromium
                 crc
                 docker
                 firefox
@@ -115,7 +114,7 @@
                 openssl
                 teleport
                 yq
-              ];
+              ] + optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.chromium) pkgs.chromium;
             };
 
             codegouvfr = {
