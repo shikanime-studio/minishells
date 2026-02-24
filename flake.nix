@@ -103,8 +103,10 @@
               packages = with pkgs; [
                 age
                 ansible
+                chromium
                 crc
                 docker
+                firefox
                 gnutar
                 kind
                 kubectl
