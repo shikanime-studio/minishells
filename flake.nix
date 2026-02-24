@@ -100,21 +100,24 @@
                 ruby.enable = true;
               };
 
-              packages = with pkgs; [
-                age
-                ansible
-                crc
-                docker
-                firefox
-                gnutar
-                kind
-                kubectl
-                kubernetes-helm
-                pnpm
-                openssl
-                teleport
-                yq
-              ] + optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.chromium) pkgs.chromium;
+              packages =
+                with pkgs;
+                [
+                  age
+                  ansible
+                  crc
+                  docker
+                  firefox
+                  gnutar
+                  kind
+                  kubectl
+                  kubernetes-helm
+                  pnpm
+                  openssl
+                  teleport
+                  yq
+                ]
+                ++ optional (lib.meta.availableOn stdenv.hostPlatform chromium) chromium;
             };
 
             codegouvfr = {
@@ -131,8 +134,8 @@
 
               languages.rust.enable = true;
 
-              packages = [
-                pkgs.libiconv
+              packages = with pkgs; [
+                libiconv
               ];
             };
 
@@ -148,10 +151,10 @@
                 python.enable = true;
               };
 
-              packages = [
-                pkgs.gnumake
-                pkgs.libiconv
-                pkgs.mercurial
+              packages = with pkgs; [
+                gnumake
+                libiconv
+                mercurial
               ];
             };
 
@@ -160,20 +163,20 @@
 
               languages.c.enable = true;
 
-              packages = [
-                pkgs.bc
-                pkgs.bison
-                pkgs.flex
-                pkgs.gcc
-                pkgs.gnumake
-                pkgs.ncurses
-                pkgs.openssl
-                pkgs.pkg-config
-                pkgs.python3
-                pkgs.zlib
+              packages = with pkgs; [
+                bc
+                bison
+                flex
+                gcc
+                gnumake
+                ncurses
+                openssl
+                pkg-config
+                python3
+                zlib
               ]
-              ++ optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.elfutils) pkgs.elfutils
-              ++ optional (lib.meta.availableOn pkgs.stdenv.hostPlatform pkgs.pahole) pkgs.pahole;
+              ++ optional (lib.meta.availableOn stdenv.hostPlatform elfutils) elfutils
+              ++ optional (lib.meta.availableOn stdenv.hostPlatform pahole) pahole;
             };
 
             longhorn = {
@@ -186,19 +189,19 @@
 
               languages.go.enable = true;
 
-              packages = [
-                pkgs.docker
-                pkgs.gnumake
-                pkgs.kubectl
-                pkgs.kustomize
+              packages = with pkgs; [
+                docker
+                gnumake
+                kubectl
+                kustomize
               ];
             };
 
             nixos = {
               containers = mkForce { };
 
-              packages = [
-                pkgs.nixpkgs-review
+              packages = with pkgs; [
+                nixpkgs-review
               ];
             };
           };
