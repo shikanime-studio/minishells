@@ -70,7 +70,7 @@
         { lib, pkgs, ... }:
         with lib;
         {
-          devenv.shells = {
+          devenv.shells = rec {
             default.imports = [
               devlib.devenvModules.git
               devlib.devenvModules.nix
@@ -81,6 +81,16 @@
             cloud-pi-native = {
               containers = mkForce { };
 
+              packages = with pkgs; [
+                kubectl
+                kubernetes-helm
+                teleport
+              ];
+            };
+
+            "cloud-pi-native/console" = {
+              imports = [ cloud-pi-native ];
+
               env = {
                 PRISMA_FMT_BINARY = "${pkgs.prisma-engines_6}/bin/prisma-fmt";
                 PRISMA_QUERY_ENGINE_BINARY = "${pkgs.prisma-engines_6}/bin/query-engine";
@@ -88,11 +98,24 @@
                 PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines_6}/bin/schema-engine";
               };
 
+              languages.javascript = {
+                enable = true;
+                pnpm.enable = true;
+              };
+
+              packages =
+                with pkgs;
+                [
+                  docker
+                  firefox
+                ]
+                ++ optional (lib.meta.availableOn stdenv.hostPlatform chromium) chromium;
+            };
+
+            "cloud-pi-native/socle" = {
+              imports = [ cloud-pi-native ];
+
               languages = {
-                javascript = {
-                  enable = true;
-                  pnpm.enable = true;
-                };
                 python = {
                   enable = true;
                   uv.enable = true;
@@ -100,24 +123,11 @@
                 ruby.enable = true;
               };
 
-              packages =
-                with pkgs;
-                [
-                  age
-                  ansible
-                  crc
-                  docker
-                  firefox
-                  gnutar
-                  kind
-                  kubectl
-                  kubernetes-helm
-                  pnpm
-                  openssl
-                  teleport
-                  yq
-                ]
-                ++ optional (lib.meta.availableOn stdenv.hostPlatform chromium) chromium;
+              packages = with pkgs; [
+                ansible
+                gnutar
+                yq
+              ];
             };
 
             codegouvfr = {
@@ -139,7 +149,7 @@
               ];
             };
 
-            facebook = {
+            "facebook/sapling" = {
               containers = mkForce { };
 
               languages = {
@@ -158,25 +168,27 @@
               ];
             };
 
-            linux = {
+            "torvalds/linux" = {
               containers = mkForce { };
 
               languages.c.enable = true;
 
-              packages = with pkgs; [
-                bc
-                bison
-                flex
-                gcc
-                gnumake
-                ncurses
-                openssl
-                pkg-config
-                python3
-                zlib
-              ]
-              ++ optional (lib.meta.availableOn stdenv.hostPlatform elfutils) elfutils
-              ++ optional (lib.meta.availableOn stdenv.hostPlatform pahole) pahole;
+              packages =
+                with pkgs;
+                [
+                  bc
+                  bison
+                  flex
+                  gcc
+                  gnumake
+                  ncurses
+                  openssl
+                  pkg-config
+                  python3
+                  zlib
+                ]
+                ++ optional (lib.meta.availableOn stdenv.hostPlatform elfutils) elfutils
+                ++ optional (lib.meta.availableOn stdenv.hostPlatform pahole) pahole;
             };
 
             longhorn = {
@@ -200,8 +212,21 @@
             nixos = {
               containers = mkForce { };
 
+              languages.nix.enable = true;
+
               packages = with pkgs; [
                 nixpkgs-review
+              ];
+            };
+
+            shikanime-studio = {
+              containers = mkForce { };
+
+              languages.nix.enable = true;
+
+              packages = with pkgs; [
+                gh
+                ghstack
               ];
             };
           };
