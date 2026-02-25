@@ -78,8 +78,17 @@
               devlib.devenvModules.shikanime
             ];
 
-            cloud-pi-native = {
+            base = {
               containers = mkForce { };
+
+              packages = with pkgs; [
+                gh
+                sapling
+              ];
+            };
+
+            cloud-pi-native = {
+              imports = [ base ];
 
               packages = with pkgs; [
                 kubectl
@@ -140,7 +149,7 @@
             };
 
             jj-vcs = {
-              containers = mkForce { };
+              imports = [ base ];
 
               languages.rust.enable = true;
 
@@ -149,8 +158,10 @@
               ];
             };
 
+            facebook.imports = [ base ];
+
             "facebook/sapling" = {
-              containers = mkForce { };
+              imports = [ facebook ];
 
               languages = {
                 javascript = {
@@ -168,8 +179,10 @@
               ];
             };
 
+            torvalds.imports = [ base ];
+
             "torvalds/linux" = {
-              containers = mkForce { };
+              imports = [ torvalds ];
 
               languages.c.enable = true;
 
@@ -192,7 +205,7 @@
             };
 
             longhorn = {
-              containers = mkForce { };
+              imports = [ base ];
 
               git-hooks.hooks = {
                 golangci-lint.enable = true;
@@ -210,7 +223,7 @@
             };
 
             nixos = {
-              containers = mkForce { };
+              imports = [ base ];
 
               languages.nix.enable = true;
 
@@ -220,12 +233,11 @@
             };
 
             shikanime-studio = {
-              containers = mkForce { };
+              imports = [ base ];
 
               languages.nix.enable = true;
 
               packages = with pkgs; [
-                gh
                 ghstack
               ];
             };
