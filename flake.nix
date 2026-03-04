@@ -119,6 +119,15 @@
                   firefox
                 ]
                 ++ optional (lib.meta.availableOn stdenv.hostPlatform chromium) chromium;
+
+              services.prometheus = {
+                enable = true;
+                experimentalFeatures = {
+                  enableExemplars = true;
+                  enableOTLP = true;
+                  enableTracing = true;
+                };
+              };
             };
 
             "cloud-pi-native/socle" = {
