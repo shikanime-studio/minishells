@@ -135,7 +135,10 @@
 
               languages.helm.enable = true;
 
-              packages = with pkgs; [ chart-testing ];
+              packages = with pkgs; [
+                chart-testing
+                helm-docs
+              ];
             };
 
             "cloud-pi-native/socle" = {
