@@ -90,6 +90,8 @@
             cloud-pi-native = {
               imports = [ base ];
 
+              env.TELEPORT_ADD_KEYS_TO_AGENT = "no";
+
               packages = with pkgs; [
                 kubectl
                 kubernetes-helm
