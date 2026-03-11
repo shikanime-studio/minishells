@@ -121,6 +121,14 @@
                 ++ optional (lib.meta.availableOn stdenv.hostPlatform chromium) chromium;
             };
 
+            "cloud-pi-native/helm-charts" = {
+              imports = [ cloud-pi-native ];
+
+              languages.helm.enable = true;
+
+              packages = with pkgs; [ chart-testing ];
+            };
+
             "cloud-pi-native/socle" = {
               imports = [ cloud-pi-native ];
 
