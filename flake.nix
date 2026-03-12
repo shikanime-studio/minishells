@@ -94,6 +94,7 @@
                 kubectl
                 kubernetes-helm
                 teleport
+                vault
               ];
             };
 
