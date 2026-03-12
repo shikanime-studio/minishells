@@ -55,6 +55,7 @@
       devlib,
       flake-parts,
       git-hooks,
+      nixpkgs,
       treefmt-nix,
       ...
     }:
@@ -67,9 +68,19 @@
       ];
 
       perSystem =
-        { lib, pkgs, ... }:
+        {
+          lib,
+          pkgs,
+          system,
+          ...
+        }:
         with lib;
         {
+          _module.args.pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+
           devenv.shells = rec {
             default.imports = [
               devlib.devenvModules.git
