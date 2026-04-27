@@ -1,15 +1,11 @@
 jobs:
   backport:
     if: github.event.issue.pull_request != null && contains(github.event.comment.body, '.backport')
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
     runs-on: ubuntu-slim
     steps:
       - continue-on-error: true
         id: createGithubAppToken
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           permission-contents: write
@@ -19,7 +15,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          ref: main
           token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - uses: cachix/install-nix-action@v31
         with:
@@ -32,15 +27,11 @@ jobs:
           sign-commits: true
   close:
     if: github.event.issue.pull_request != null && contains(github.event.comment.body, '.close')
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
     runs-on: ubuntu-slim
     steps:
       - continue-on-error: true
         id: createGithubAppToken
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           permission-contents: write
@@ -50,7 +41,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          ref: main
           token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - uses: cachix/install-nix-action@v31
         with:
@@ -61,15 +51,11 @@ jobs:
           username: operator6o
   land:
     if: github.event.issue.pull_request != null && contains(github.event.comment.body, '.land')
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
     runs-on: ubuntu-slim
     steps:
       - continue-on-error: true
         id: createGithubAppToken
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           permission-administration: read
@@ -80,7 +66,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          ref: main
           token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - uses: cachix/install-nix-action@v31
         with:
@@ -96,15 +81,11 @@ jobs:
           username: operator6o
   rebase:
     if: github.event.issue.pull_request != null && contains(github.event.comment.body, '.rebase')
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
     runs-on: ubuntu-slim
     steps:
       - continue-on-error: true
         id: createGithubAppToken
-        uses: actions/create-github-app-token@v3
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.OPERATOR_APP_ID }}
           permission-contents: write
@@ -114,7 +95,6 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-          ref: main
           token: ${{ steps.createGithubAppToken.outputs.token || secrets.GITHUB_TOKEN }}
       - uses: cachix/install-nix-action@v31
         with:
@@ -134,4 +114,6 @@ name: Commands
     types:
       - created
 permissions:
-  contents: read
+  contents: write
+  issues: write
+  pull-requests: write
