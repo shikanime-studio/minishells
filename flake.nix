@@ -104,6 +104,7 @@
               env.TELEPORT_ADD_KEYS_TO_AGENT = "no";
 
               packages = with pkgs; [
+                jre_minimal
                 kubectl
                 kubernetes-helm
                 teleport
