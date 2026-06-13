@@ -1,4 +1,4 @@
-# minishells
+# Minishells
 
 Portable Nix/devenv shells for different open source organizations. Instead of reinventing a dev environment every time, plug in system config once and spin up a shell per project.
 
