@@ -1,6 +1,8 @@
 # Minishells
 
-Portable Nix/devenv shells for different open source organizations. Instead of reinventing a dev environment every time, plug in system config once and spin up a shell per project.
+Portable Nix/devenv shells for different open source organizations. Instead of
+reinventing a dev environment every time, plug in system config once and spin up
+a shell per project.
 
 **Language:** Nix
 
@@ -9,6 +11,11 @@ Portable Nix/devenv shells for different open source organizations. Instead of r
 - `flake.nix` — Main flake exposing all shells
 - `.envrc` — Direnv configuration for automatic shell loading
 - Individual shell definitions as flake outputs
+
+## Usage
+
+Each shell provides a self-contained development environment for a specific
+project or organization. Load via `direnv` or `nix develop`.
 
 ## Commit Style
 
@@ -32,4 +39,5 @@ Portable Nix/devenv shells for different open source organizations. Instead of r
 - Require signed commits
 - Squash+rebase merge only
 
-*Licensed under Apache-2.0. Shells should be self-contained. Test with `nix flake check` before submitting*
+*Licensed under Apache-2.0. Shells should be self-contained. Test with
+`nix flake check` before submitting. Always use worktrees when making changes.*
