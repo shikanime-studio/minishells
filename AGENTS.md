@@ -38,7 +38,7 @@ project or organization. Load via `direnv` or `nix develop`.
 - Never force-push ghstack branches
 
 
- `main`
+## Protect `main`
 
 - Require 1 approving review
 - Require linear history (no merge commits)
